@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-300: #FDE047;
+  --color-gold-400: #EAB308;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #CA8A04;
+  --color-rose-gold: #B76E79;
+}
+
+@layer base {
+  html, body {
+    @apply bg-zinc-950 text-zinc-50 antialiased selection:bg-gold-500 selection:text-zinc-950;
+  }
+}
