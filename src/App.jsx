@@ -3,6 +3,7 @@ import Header from './components/Header';
 import DailyCheckIn from './components/DailyCheckIn';
 import AffirmationCard from './components/AffirmationCard';
 import GoalTracker from './components/GoalTracker';
+import DailyJournal from './components/DailyJournal';
 import StreakCounter from './components/StreakCounter';
 import PremiumLockedSection from './components/PremiumLockedSection';
 import ProModal from './components/ProModal';
@@ -27,6 +28,7 @@ function App() {
         <DailyCheckIn />
         <AffirmationCard />
         <GoalTracker />
+        <DailyJournal />
 
         <div className="pt-8 border-t border-zinc-800">
           <PremiumLockedSection onOpenPro={() => setIsProModalOpen(true)} isPro={isPro} />
