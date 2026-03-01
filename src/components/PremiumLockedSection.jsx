@@ -1,6 +1,9 @@
-import { Lock, TrendingUp, Download, Settings, Brain, CheckCircle2 } from 'lucide-react';
+import { Lock, TrendingUp, Download, Settings, Brain, CheckCircle2, Info } from 'lucide-react';
+import { useState } from 'react';
 
 export default function PremiumLockedSection({ onOpenPro, isPro }) {
+    const [showToast, setShowToast] = useState(false);
+
     const premiumFeatures = [
         {
             icon: <Brain className="w-5 h-5 text-rose-gold" />,
@@ -24,6 +27,14 @@ export default function PremiumLockedSection({ onOpenPro, isPro }) {
         }
     ];
 
+    const handleFeatureClick = () => {
+        setShowToast(true);
+        if (typeof window !== 'undefined' && window.navigator && window.navigator.vibrate) {
+            window.navigator.vibrate(50);
+        }
+        setTimeout(() => setShowToast(false), 2500);
+    };
+
     if (isPro) {
         return (
             <div className="space-y-4">
@@ -38,9 +49,10 @@ export default function PremiumLockedSection({ onOpenPro, isPro }) {
                     {premiumFeatures.map((feature, idx) => (
                         <div
                             key={idx}
-                            className="flex items-start gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800 transition-colors"
+                            onClick={handleFeatureClick}
+                            className="flex items-start gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800 transition-colors cursor-pointer hover:bg-zinc-800 group"
                         >
-                            <div className="p-2 bg-zinc-800 rounded-lg">
+                            <div className="p-2 bg-zinc-800 rounded-lg group-hover:bg-zinc-700 transition-colors">
                                 {feature.icon}
                             </div>
                             <div>
@@ -52,6 +64,14 @@ export default function PremiumLockedSection({ onOpenPro, isPro }) {
                         </div>
                     ))}
                 </div>
+
+                {/* Coming Soon Toast */}
+                {showToast && (
+                    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-800 text-zinc-100 px-4 py-3 rounded-xl shadow-xl border border-zinc-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4 z-50">
+                        <Info className="w-5 h-5 text-gold-400" />
+                        <span className="text-sm font-medium">Feature coming in the next update!</span>
+                    </div>
+                )}
             </div>
         );
     }
