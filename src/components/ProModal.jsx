@@ -72,27 +72,45 @@ export default function ProModal({ isOpen, onClose, isPro }) {
 
                     <div className="space-y-4">
                         <a
-                            href="https://buy.stripe.com/test_placeholder"
+                            href="https://buy.stripe.com/test_aFa4gy54X0OLfLA8px"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-between w-full p-4 rounded-xl border-2 border-gold-500 bg-gold-500/10 hover:bg-gold-500/20 transition-all group"
+                            className="flex items-center justify-between w-full p-4 rounded-xl border-2 border-gold-500 bg-gold-500/10 hover:bg-gold-500/20 transition-all group shadow-[0_0_15px_rgba(212,175,55,0.1)] hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]"
                         >
                             <div className="text-left flex-1 border-r border-gold-500/20 mr-4">
-                                <p className="font-bold text-lg text-gold-400">Unlock Lifetime Pro</p>
+                                <p className="font-bold text-lg text-gold-400">Lifetime Pro</p>
                                 <div className="flex items-center gap-1.5 text-xs text-zinc-400 mt-1">
                                     <Lock className="w-3 h-3" /> Secure Payment
                                 </div>
                             </div>
                             <div className="text-right whitespace-nowrap">
                                 <p className="font-black text-2xl text-zinc-100">$27</p>
-                                <p className="text-[10px] text-zinc-400 uppercase tracking-widest mt-0.5">Pay Once</p>
+                                <p className="text-[10px] text-zinc-400 uppercase tracking-widest mt-0.5">One-time payment, forever access</p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="https://buy.stripe.com/test_00wfZg2WPdBxgPE219"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-between w-full p-4 rounded-xl border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 transition-colors group"
+                        >
+                            <div className="text-left flex-1 mr-4">
+                                <p className="font-bold text-lg text-zinc-100">Monthly Pro</p>
+                                <div className="flex items-center gap-1.5 text-xs text-zinc-400 mt-1">
+                                    <Lock className="w-3 h-3 text-zinc-500" /> Secure Payment
+                                </div>
+                            </div>
+                            <div className="text-right whitespace-nowrap">
+                                <p className="font-black text-2xl text-zinc-100">$7<span className="text-sm font-normal text-zinc-400">/mo</span></p>
+                                <p className="text-[10px] text-zinc-400 uppercase tracking-widest mt-0.5">Cancel anytime</p>
                             </div>
                         </a>
 
                         <div className="flex items-start gap-3 p-3 bg-zinc-950/50 rounded-lg border border-zinc-800">
                             <Mail className="w-5 h-5 text-zinc-400 shrink-0 mt-0.5" />
-                            <p className="text-xs text-zinc-400 leading-relaxed">
-                                <strong className="text-zinc-300">How it works:</strong> After payment, you will receive an email containing your unique <strong>Pro Code</strong>. Enter this code in the Settings menu to instantly unlock all features.
+                            <p className="text-xs text-zinc-400 leading-relaxed text-center w-full">
+                                After payment, check your email for your Pro Code to unlock features.
                             </p>
                         </div>
                     </div>
