@@ -72,7 +72,7 @@ export default function ProModal({ isOpen, onClose, isPro }) {
 
                     <div className="space-y-4">
                         <a
-                            href="https://buy.stripe.com/test_aFa4gy54X0OLfLA8px"
+                            href="https://buy.stripe.com/test_aFa4gy54X0OLfLA8px0Fi00"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-between w-full p-4 rounded-xl border-2 border-gold-500 bg-gold-500/10 hover:bg-gold-500/20 transition-all group shadow-[0_0_15px_rgba(212,175,55,0.1)] hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]"
@@ -90,7 +90,7 @@ export default function ProModal({ isOpen, onClose, isPro }) {
                         </a>
 
                         <a
-                            href="https://buy.stripe.com/test_00wfZg2WPdBxgPE219"
+                            href="https://buy.stripe.com/test_00wfZg2WPdBxgPE2190Fi01"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-between w-full p-4 rounded-xl border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 transition-colors group"
