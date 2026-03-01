@@ -1,5 +1,9 @@
 import { Lock, TrendingUp, Download, Settings, Brain, CheckCircle2, Info } from 'lucide-react';
 import { useState } from 'react';
+import MindsetInsights from './Premium/MindsetInsights';
+import HistoryView from './Premium/HistoryView';
+import CustomAffirmations from './Premium/CustomAffirmations';
+import ReportExport from './Premium/ReportExport';
 
 export default function PremiumLockedSection({ onOpenPro, isPro }) {
     const [showToast, setShowToast] = useState(false);
@@ -38,40 +42,10 @@ export default function PremiumLockedSection({ onOpenPro, isPro }) {
     if (isPro) {
         return (
             <div className="space-y-4">
-                <div className="flex items-center justify-between mb-2">
-                    <h2 className="text-lg font-bold text-zinc-100 font-serif tracking-wide pt-2">Premium Features</h2>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-green-500/10 text-green-400 border border-green-500/20 uppercase tracking-widest flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3" /> Active
-                    </span>
-                </div>
-
-                <div className="grid gap-3">
-                    {premiumFeatures.map((feature, idx) => (
-                        <div
-                            key={idx}
-                            onClick={handleFeatureClick}
-                            className="flex items-start gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800 transition-colors cursor-pointer hover:bg-zinc-800 group"
-                        >
-                            <div className="p-2 bg-zinc-800 rounded-lg group-hover:bg-zinc-700 transition-colors">
-                                {feature.icon}
-                            </div>
-                            <div>
-                                <h4 className="text-zinc-200 text-sm font-semibold mb-1">
-                                    {feature.title}
-                                </h4>
-                                <p className="text-xs text-zinc-500">{feature.description}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Coming Soon Toast */}
-                {showToast && (
-                    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-800 text-zinc-100 px-4 py-3 rounded-xl shadow-xl border border-zinc-700 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4 z-50">
-                        <Info className="w-5 h-5 text-gold-400" />
-                        <span className="text-sm font-medium">Feature coming in the next update!</span>
-                    </div>
-                )}
+                <MindsetInsights />
+                <HistoryView />
+                <CustomAffirmations />
+                <ReportExport />
             </div>
         );
     }

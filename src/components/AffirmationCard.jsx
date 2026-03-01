@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Bookmark, RefreshCw } from 'lucide-react';
+import { Bookmark } from 'lucide-react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const AFFIRMATIONS = [
+const DEFAULT_AFFIRMATIONS = [
     "Money flows to me easily and frequently.",
     "I am a magnet for financial abundance.",
     "My actions create constant prosperity.",
@@ -15,12 +16,13 @@ const AFFIRMATIONS = [
 export default function AffirmationCard() {
     const [affirmation, setAffirmation] = useState('');
     const [saved, setSaved] = useState(false);
+    const [customAffirmations] = useLocalStorage('customAffirmations', []);
 
     useEffect(() => {
-        // Pick one deterministically based on date so it stays the same all day
+        const pool = [...DEFAULT_AFFIRMATIONS, ...customAffirmations];
         const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-        setAffirmation(AFFIRMATIONS[dayOfYear % AFFIRMATIONS.length]);
-    }, []);
+        setAffirmation(pool[dayOfYear % pool.length]);
+    }, [customAffirmations]);
 
     const handleSave = () => {
         if (typeof window !== 'undefined' && window.navigator && window.navigator.vibrate) {
@@ -47,8 +49,8 @@ export default function AffirmationCard() {
                 <button
                     onClick={handleSave}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${saved
-                            ? 'bg-rose-gold/20 text-rose-gold border border-rose-gold/30'
-                            : 'bg-zinc-800 text-zinc-300 hover:text-zinc-100 border border-zinc-700'
+                        ? 'bg-rose-gold/20 text-rose-gold border border-rose-gold/30'
+                        : 'bg-zinc-800 text-zinc-300 hover:text-zinc-100 border border-zinc-700'
                         }`}
                 >
                     <Bookmark className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} />

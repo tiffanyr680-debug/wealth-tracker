@@ -4,13 +4,19 @@ import confetti from 'canvas-confetti';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export default function DailyCheckIn() {
-    const [rating, setRating] = useState(0);
     const [hovered, setHovered] = useState(0);
     const [lastCheckIn, setLastCheckIn] = useLocalStorage('lastCheckIn', null);
     const [streak, setStreak] = useLocalStorage('streak', 0);
+    const [ratingHistory, setRatingHistory] = useLocalStorage('ratingHistory', []);
 
     const today = new Date().toISOString().split('T')[0];
     const hasCheckedInToday = lastCheckIn === today;
+
+    // Find today's rating if it exists
+    const todaysRatingEntry = ratingHistory.find(entry => entry.date === today);
+    const currentRating = todaysRatingEntry ? todaysRatingEntry.rating : 0;
+
+    const [rating, setRating] = useState(currentRating);
 
     const handleRate = (value) => {
         if (hasCheckedInToday) return;
@@ -23,6 +29,10 @@ export default function DailyCheckIn() {
         setRating(value);
         setLastCheckIn(today);
         setStreak(streak + 1);
+
+        // Save to history
+        const newHistory = [...ratingHistory.filter(entry => entry.date !== today), { date: today, rating: value }];
+        setRatingHistory(newHistory);
 
         // Celebration
         confetti({
@@ -49,12 +59,12 @@ export default function DailyCheckIn() {
                         className="p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 rounded-full transition-transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label={`Rate ${star} stars`}
                         role="radio"
-                        aria-checked={rating >= star || (hasCheckedInToday && star <= rating)} // Needs real persistent daily rating storage ideally, but MVP is just taking action.
+                        aria-checked={rating >= star}
                     >
                         <Star
-                            className={`w-10 h-10 transition-colors duration-200 ${(hovered || rating) >= star || (hasCheckedInToday && star <= 3 /* placeholder real rating */)
-                                    ? 'fill-gold-400 text-gold-400'
-                                    : 'fill-transparent text-zinc-600'
+                            className={`w-10 h-10 transition-colors duration-200 ${(hovered || rating) >= star
+                                ? 'fill-gold-400 text-gold-400'
+                                : 'fill-transparent text-zinc-600'
                                 }`}
                         />
                     </button>
