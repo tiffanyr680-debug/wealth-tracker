@@ -72,7 +72,7 @@ export default function ProModal({ isOpen, onClose, isPro }) {
 
                     <div className="space-y-4">
                         <a
-                            href="https://buy.stripe.com/test_aFa4gy54X0OLfLA8px0Fi00"
+                            href="https://buy.stripe.com/cNicN73DCffPfSv53kafS07"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-between w-full p-4 rounded-xl border-2 border-gold-500 bg-gold-500/10 hover:bg-gold-500/20 transition-all group shadow-[0_0_15px_rgba(212,175,55,0.1)] hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]"
@@ -90,7 +90,7 @@ export default function ProModal({ isOpen, onClose, isPro }) {
                         </a>
 
                         <a
-                            href="https://buy.stripe.com/test_00wfZg2WPdBxgPE2190Fi01"
+                            href="https://buy.stripe.com/aFa6oJ5LKffP21FfHYafS06"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-between w-full p-4 rounded-xl border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 transition-colors group"
@@ -111,6 +111,42 @@ export default function ProModal({ isOpen, onClose, isPro }) {
                             <Mail className="w-5 h-5 text-zinc-400 shrink-0 mt-0.5" />
                             <p className="text-xs text-zinc-400 leading-relaxed text-center w-full">
                                 After payment, check your email for your Pro Code to unlock features.
+                            </p>
+                        </div>
+
+                        {/* Customer Support Section */}
+                        <div className="mt-6 p-4 bg-zinc-800/80 rounded-xl border border-zinc-700/50 text-left relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-indigo-500/10 transition-colors"></div>
+
+                            <h3 className="font-semibold text-zinc-200 flex items-center gap-2 mb-2">
+                                <span className="text-lg">🎧</span> Need Help?
+                            </h3>
+                            <p className="text-sm text-zinc-400 mb-4 leading-relaxed">
+                                Having trouble with the app or your Pro upgrade?<br />
+                                I'm here to help!
+                            </p>
+
+                            <div className="space-y-2 text-sm">
+                                <a href="mailto:tiffany6459@gmail.com" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors">
+                                    <span className="text-zinc-500">📧</span> Email: tiffany6459@gmail.com
+                                </a>
+                                <a href="https://instagram.com/inspirepowerquotes" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors">
+                                    <span className="text-zinc-500">📱</span> Instagram DM: @inspirepowerquotes
+                                </a>
+                            </div>
+
+                            <p className="text-xs text-zinc-500 mt-4 italic">
+                                I respond within 24 hours!
+                            </p>
+                        </div>
+
+                        {/* Refund Policy */}
+                        <div className="mt-4 p-3 bg-orange-950/20 border border-orange-500/30 rounded-xl">
+                            <h4 className="text-xs font-semibold text-orange-400 flex items-center gap-1.5 mb-1">
+                                <span>⚠️</span> Refund Policy:
+                            </h4>
+                            <p className="text-[11px] text-zinc-400 italic leading-relaxed">
+                                Pro purchases are final. If you experience technical issues, please contact me first before requesting a refund. Refunds may result in immediate loss of Pro access.
                             </p>
                         </div>
                     </div>
