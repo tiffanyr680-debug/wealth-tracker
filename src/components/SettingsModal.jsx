@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { X, CheckCircle, AlertCircle, RefreshCw, Info } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, CheckCircle, AlertCircle, RefreshCw, Info, Key, Eye, EyeOff } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import HowToUseModal from './HowToUseModal';
 
@@ -24,6 +24,19 @@ export default function SettingsModal({ isOpen, onClose, isPro, setProStatus }) 
     // How To Use Guide State
     const [isHowToUseOpen, setIsHowToUseOpen] = useState(false);
     const [hasSeenHowToUseGuide, setHasSeenHowToUseGuide] = useLocalStorage('hasSeenHowToUseGuide', false);
+
+    // OpenAI API Key State
+    const [openAIKey, setOpenAIKey] = useLocalStorage('openAIKey', '');
+    const [tempKey, setTempKey] = useState('');
+    const [isKeyVisible, setIsKeyVisible] = useState(false);
+    const [keyStatus, setKeyStatus] = useState('idle'); // idle, loading, success
+    const [keyMessage, setKeyMessage] = useState('');
+
+    useEffect(() => {
+        if (openAIKey) {
+            setTempKey(openAIKey);
+        }
+    }, [openAIKey, isOpen]);
 
     if (!isOpen && !isHowToUseOpen) return null; // Keep alive if child is open so it renders
 
@@ -106,6 +119,22 @@ export default function SettingsModal({ isOpen, onClose, isPro, setProStatus }) 
     const handleOpenHowToUse = () => {
         setHasSeenHowToUseGuide(true);
         setIsHowToUseOpen(true);
+    };
+
+    const handleSaveAPIKey = () => {
+        setKeyStatus('loading');
+        setTimeout(() => {
+            setOpenAIKey(tempKey.trim());
+            setKeyStatus('success');
+            setMessage('API Key saved securely.');
+            if (typeof window !== 'undefined' && window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate([100, 50, 100]);
+            }
+            setTimeout(() => {
+                setKeyStatus('idle');
+                setMessage('');
+            }, 2500);
+        }, 600);
     };
 
     return (
@@ -193,6 +222,7 @@ export default function SettingsModal({ isOpen, onClose, isPro, setProStatus }) 
                                     )}
                                 </div>
 
+
                                 <div className="pt-4 border-t border-zinc-800">
                                     <button
                                         onClick={handleRestore}
@@ -211,6 +241,50 @@ export default function SettingsModal({ isOpen, onClose, isPro, setProStatus }) 
                                     </div>
                                     <h3 className="text-lg font-semibold text-zinc-100 mb-1">Lifetime Pro Active</h3>
                                     <p className="text-sm text-zinc-400">Thank you for investing in yourself.</p>
+                                </div>
+
+                                {/* API Key Settings */}
+                                <div className="pt-6 border-t border-zinc-800 text-left">
+                                    <label className="flex items-center gap-2 text-sm font-medium text-zinc-300 mb-1">
+                                        <Key className="w-4 h-4 text-zinc-400" />
+                                        OpenAI API Key
+                                    </label>
+                                    <p className="text-xs text-zinc-500 mb-3">Stored locally. Required for AI features.</p>
+
+                                    <div className="flex gap-2">
+                                        <div className="relative flex-1">
+                                            <input
+                                                type={isKeyVisible ? "text" : "password"}
+                                                value={tempKey}
+                                                onChange={(e) => setTempKey(e.target.value)}
+                                                placeholder="sk-..."
+                                                autoCapitalize="none"
+                                                autoComplete="off"
+                                                autoCorrect="off"
+                                                className="w-full bg-zinc-950 border border-zinc-700 text-zinc-100 rounded-xl pl-4 pr-10 py-2 text-sm focus:outline-none focus:border-gold-500 font-mono"
+                                            />
+                                            <button
+                                                onClick={() => setIsKeyVisible(!isKeyVisible)}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+                                            >
+                                                {isKeyVisible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                            </button>
+                                        </div>
+                                        <button
+                                            onClick={handleSaveAPIKey}
+                                            disabled={keyStatus === 'loading'}
+                                            className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium rounded-xl text-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                        >
+                                            {keyStatus === 'loading' ? 'Saving...' : 'Save Key'}
+                                        </button>
+                                    </div>
+
+                                    {keyStatus === 'success' && (
+                                        <div className="flex items-center gap-2 text-green-400 text-sm mt-3 animate-in fade-in">
+                                            <CheckCircle className="w-4 h-4" />
+                                            {message}
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Deactivate Pro Feature */}
